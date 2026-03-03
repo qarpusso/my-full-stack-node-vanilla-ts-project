@@ -1,1 +1,34 @@
-document.addEventListener("DOMContentLoaded", (event) => { })
+function toggleSidebar() {
+    document.getElementById('notesSidebar').classList.toggle('collapsed');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const textarea = document.getElementById('noteInput');
+    const preview = document.getElementById('notePreview');
+    const previewBtn = document.getElementById('previewBtn');
+
+    let isPreview = false;
+
+    previewBtn.addEventListener('click', () => {
+        if (!isPreview) {
+            // EDIT → PREVIEW
+            const markdownText = textarea.value;
+
+            // markdown → html
+            preview.innerHTML = marked.parse(markdownText);
+
+            textarea.classList.add('d-none');
+            preview.classList.remove('d-none');
+
+            previewBtn.textContent = 'Edit';
+            isPreview = true;
+        } else {
+            // PREVIEW → EDIT
+            preview.classList.add('d-none');
+            textarea.classList.remove('d-none');
+
+            previewBtn.textContent = 'Preview';
+            isPreview = false;
+        }
+    });
+});
