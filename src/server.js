@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import { aiRouter } from "./routes/aiRoute.js";
+import {signUpRoute} from "./routes/signUpRoute.js";
 
 const PORT = process.env.PORT || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET || "loremipsum";
@@ -43,6 +44,7 @@ app.get("/:page", (req, res) => {
 });
 
 app.use("/api/ask", aiRouter);
+app.use("/api/sign-up", signUpRoute);
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

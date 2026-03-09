@@ -15,5 +15,18 @@ document.addEventListener("DOMContentLoaded", function(event){
             errorEl.textContent = "passwords are not matching!"
             return;
         }
+        const response = await fetch("/api/sign-up",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password,
+            }),
+        });
+        const data = await response.json();
+        console.log(data);
     })
 });
